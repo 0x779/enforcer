@@ -7,7 +7,7 @@ import generateThumbs
 help_string = """
     Commands:\n\n
     --scan - Scan the selected folder against known hashes\n
-    --scan - Scan the selected folder against known hashes and save a comparison result image\n
+    --scan result - Scan the selected folder against known hashes and save a comparison result image\n
     --generate hashes - Generate hashes from the files in the selected folder\n
     --generate thumbs - Generate thumbnails from the files in the selected folder\n
 
