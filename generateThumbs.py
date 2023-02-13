@@ -7,7 +7,7 @@ from tqdm import tqdm
 from PIL import Image
 from pathlib import Path
 
-size = 90, 90
+size = 512, 512
 
 async def resize_image(file_path):
     with Image.open(file_path) as im:
