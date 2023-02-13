@@ -43,6 +43,3 @@ async def main():
     await process_folder(folder_path, pbar)
 
     pbar.close()
-
-if __name__ == '__main__':
-    asyncio.run(main())

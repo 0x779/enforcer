@@ -57,6 +57,3 @@ async def main():
 
     pbar.close()
     conn.close()
-
-if __name__ == '__main__':
-    asyncio.run(main())
