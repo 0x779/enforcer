@@ -83,10 +83,14 @@ def link(uri, label=None):
     return escape_mask.format(parameters, uri, label)
 
 
-def combine_images(img1, img2, margin=50):
+def combine_images(img1, img2, margin=50, target_size=512):
     # Open the two images
     image1 = Image.open(img1)
     image2 = Image.open(img2)
+
+    # Resize images to the target size
+    image1 = image1.resize((target_size, target_size))
+    image2 = image2.resize((target_size, target_size))
 
     # Get the width and height of the images
     width1, height1 = image1.size
@@ -101,7 +105,7 @@ def combine_images(img1, img2, margin=50):
     total_width = width1 + width2 + margin
 
     # Create a new image with the total width and height
-    new_image = Image.new("RGB", (total_width + margin * 2, height2 + margin *2), (50, 50, 50))
+    new_image = Image.new("RGB", (total_width + margin * 2, height2 + margin * 2), (50, 50, 50))
 
     # Paste the two images into the new image
     new_image.paste(image1, (margin, margin))
