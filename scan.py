@@ -28,7 +28,7 @@ async def process_file(file_path, cursor, pbar, resultImage):
         for row in cursor.fetchall():
             pbar.write("│ " + colored(f"{link(os.path.dirname(file_path), os.path.basename(file_path).ljust(35)[:35])}", 'red') + " │ " + colored(f"{link(os.path.join(os.path.join(os.getcwd(), 'thumbs'), Path(row[0]).stem + '_thumb.jpg'), row[0].ljust(40)[:40])}", 'green') + " │ " + colored(f"{row[2].ljust(35)[:35]}", 'blue') + "│")
             if resultImage:
-                result_images.append(combine_images(file_path, os.path.join(os.path.join(os.getcwd(), 'thumbs'), Path(row[0]).stem + '_thumb.jpg'), 50))
+                result_images.append(combine_images(file_path, os.path.join(os.path.join(os.getcwd(), 'thumbs'), Path(row[0]).stem + '_thumb.jpg', ), margin=50, original_name=row[0]))
 
     pbar.set_description(f"Processing: {os.path.basename(file_path).ljust(33)[:33]}")
     pbar.update(1)
@@ -83,7 +83,7 @@ def link(uri, label=None):
     return escape_mask.format(parameters, uri, label)
 
 
-def combine_images(img1, img2, margin=50, target_size=512):
+def combine_images(img1, img2, margin=50, target_size=512, original_name=""):
     # Open the two images
     image1 = Image.open(img1)
     image2 = Image.open(img2)
@@ -115,7 +115,7 @@ def combine_images(img1, img2, margin=50, target_size=512):
     draw = ImageDraw.Draw(new_image)
     font = ImageFont.truetype("arial.ttf", 16)
     draw.text((margin, height2 + margin + 10), os.path.basename(img1), font=font)
-    draw.text((width1 + margin *2, height2 + margin + 10), os.path.basename(img2), font=font)
+    draw.text((width1 + margin *2, height2 + margin + 10), original_name, font=font)
 
     return new_image
 
