@@ -12,7 +12,8 @@ size = 512, 512
 async def resize_image(file_path):
     with Image.open(file_path) as im:
         im.thumbnail(size)
-        im.save(os.path.join(os.path.dirname(file_path), Path(file_path).stem  + "_thumb.jpg"), "JPEG")
+        rgb_im = im.convert('RGB')
+        rgb_im.save(os.path.join(os.path.dirname(file_path), Path(file_path).stem  + "_thumb.jpg"), "JPEG")
 
 async def process_file(file_path, file_name, pbar):
     await resize_image(file_path)
